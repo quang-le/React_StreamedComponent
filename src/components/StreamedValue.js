@@ -41,11 +41,15 @@ export default class StreamedValue {
   setDebugMode;
   observer;
 
-  get outStream() {
+  outStream(callback) {
     // In this form, the callbacks still need to be defined
     // this will probably be updated when working on
     // StreamedComponent or managed directly in the Componenet itself
-    return this.stream().subscribe;
+    return this.stream().subscribe({
+      next: next => callback(next),
+      error: error => console.log("stream error: ", error),
+      complete: () => console.log("subscription complete")
+    });
   }
 
   inStream(value) {

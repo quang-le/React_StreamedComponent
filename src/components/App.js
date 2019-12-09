@@ -1,24 +1,10 @@
 import React from "react";
+import useStream from "./useStream";
 import StreamedValue from "./StreamedValue";
 
 const App = () => {
-  const mySubject = new StreamedValue({
-    initialValue: "Hello World",
-    onChange: value => console.log(value)
-  });
-
-  //console.log(mySubject);
-  mySubject.value = "value";
-
-  //console.log(mySubject);
-  try {
-    mySubject.inStream("inStream");
-  } catch (e) {
-    console.log(e);
-  }
-
-  console.log(mySubject.outStream);
-
-  return <div>{mySubject.value} </div>;
+  const myStreamedValue = new StreamedValue({ initialValue: "start" });
+  const snapshot = useStream(myStreamedValue.stream());
+  return <div>{snapshot}</div>;
 };
 export default App;
