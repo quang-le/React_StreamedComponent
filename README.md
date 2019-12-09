@@ -58,6 +58,8 @@ Just import it and use it's value: `const snapshot = useStream(myStreamedValue.s
 
 [] update useStream to be compatible with all Rx Subjects
 
+[] add error config to useStream
+
 # Contribute
 
 Feel free to file and issue, submit a PR or otherwise contact me to improve this project!

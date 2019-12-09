@@ -9,7 +9,6 @@ export default class StreamedValue {
     var _stream = new BehaviorSubject("test");
     this.timesUpdated = 0;
     this.stream = () => _stream;
-    //this.stream = this.stream.bind(this);
     var _onChange = props.onChange;
     // getter and setter syntax adapter for use in constructor
     this.getOnChange = () => _onChange;
@@ -19,7 +18,7 @@ export default class StreamedValue {
     this.setDebugMode = bool => (_debugMode = bool);
     this.getDebugMode = () => _debugMode;
 
-    //TODO check erro management in rxjs
+    //TODO check error management in rxjs
     this.observer = _stream.subscribe({
       next: next => {
         if (_onChange) {
@@ -41,14 +40,22 @@ export default class StreamedValue {
   setDebugMode;
   observer;
 
-  outStream(callback) {
-    // In this form, the callbacks still need to be defined
-    // this will probably be updated when working on
-    // StreamedComponent or managed directly in the Componenet itself
+  _isFunction(func) {
+    return typeof func === "function";
+  }
+  outStream(callback, errCallback, compCallback) {
     return this.stream().subscribe({
-      next: next => callback(next),
-      error: error => console.log("stream error: ", error),
-      complete: () => console.log("subscription complete")
+      next: this._isFunction(callback)
+        ? next => callback(next)
+        : next => console.log(next),
+      error:
+        this._isFunction(errCallback) === "function"
+          ? error => errCallback(error)
+          : error => console.log("stream error: ", error),
+      complete:
+        this._isFunction(compCallback) === "function"
+          ? () => compCallback()
+          : () => console.log("subscription complete")
     });
   }
 

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 
-const useStream = observer => {
+// observer must be an Rx observable
+const useStream = observable => {
   const [snapshot, setSnapshot] = useState();
   useEffect(() => {
-    var stream = observer.subscribe({
+    var stream = observable.subscribe({
       next: next => setSnapshot(next),
       error: error => console.log("stream error: ", error),
       complete: () => console.log("subscription complete")
