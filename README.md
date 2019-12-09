@@ -50,8 +50,11 @@ Just import it and use it's value: `` const snapshot = useStream(myStreamedValue
 # TODO
 
 [] write tests
+
 [] create StreamedList
+
 [] update useStream to include error and complete params
+
 [] update useStream to be compatible with all Rx Subjects
 
 # Contribute
