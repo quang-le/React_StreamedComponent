@@ -10,12 +10,12 @@ This is both a learning and quality of life project: as I'm using frideos' libra
 
 # Install and start test app
 
-- npx create-react-app <appName>
+- npx create-react-app [your-app]
 - yarn start
 
 # Features
 
-1. StreamedValues
+\*\*1. StreamedValue
 
 Syntactic sugar for BehaviorSubject.
 Can be initialized with a value and an onChange function by passing it an object:
@@ -41,12 +41,12 @@ I'll probably add the possibility to define error and complete callbacks as well
 
 There is a `dispose()`method to close the stream.
 
-2. useStream hook
+\*\*2. useStream hook
 
 A very simple hook that returns the latest value of a BehaviorSubject.
 Since the goal was to easily use the value emitted by s stream in a component, the hook approach proved simpler and shorter.
 
-Just import it and use it's value: `` const snapshot = useStream(myStreamedValue.stream());```
+Just import it and use it's value: `const snapshot = useStream(myStreamedValue.stream());`
 
 # TODO
 
