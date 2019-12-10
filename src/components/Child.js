@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import useStream from "./useStream";
 import BlocContext from "../contexts/BlocContext";
 
 const Child = ({ snapshot }) => {
   const context = useContext(BlocContext);
+  const renderCount = useRef(0);
   const localStream = useStream(context.testValue.stream());
 
   // Modifying stream values inside the BLoC from here
@@ -14,7 +15,12 @@ const Child = ({ snapshot }) => {
   useEffect(() => {
     context.testValue.inStream("from Child");
     context.testValue.value = "child value";
-  }, []);
+  }, [context]);
+
+  useEffect(() => {
+    renderCount.current += 1;
+    console.log("Classic Bloc render count: ", renderCount.current);
+  });
 
   return (
     <div>
