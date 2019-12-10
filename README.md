@@ -12,7 +12,7 @@ As I went on with the implementation, it struck me that React hooks could be use
 
 So the new question is: can we implement the BLoC pattern using just React hooks (sppoiler: yes, we can) and if so, is it possible to develop custom hooks/components that provide the same quality of life (more compact, legible code).
 
-This is both a learning and quality of life project: as I'm using frideos' library to manage streams in Flutter: having similar feature available in React would allow me to easily use streams and the BloC pattern as I start working with React. Creating this library or equivalent with hooks would also allow me to explore React through the lens of my Flutter experience and is a good shot at comparing the 2 frameworks.
+This is both a learning and quality of life project: as I'm using frideos' library to manage streams in Flutter, having similar feature available in React would allow me to easily use streams and the BloC pattern as I start working with React. Creating this library or equivalent with hooks would also allow me to explore React through the lens of my Flutter experience and is a good shot at comparing the 2 frameworks.
 
 # Install and start test app
 
@@ -54,7 +54,11 @@ Since the goal was to easily use the value emitted by s stream in a component, t
 
 Just import it and use it's value: `const snapshot = useStream(myStreamedValue.stream());`
 
-3. **NoDepBLoC**
+3. **Bloc and TestBloc**
+   Bloc.js is a (sort of) abstract class that ensures a `dispose()`method is overridden.
+   TestBLoC simply broadcasts a StreamedValue. The `<Child>` component consumes the value of the stream and makes use of the methods of `StreamedValue`.
+
+4. **NoDepBLoC**
 
 A POC of BLoC implementation using hooks. `NoDepBLoC`returns a `<Context.Provider>` that has all the values and methods of the BLoC in the `values` prop.
 
@@ -67,6 +71,8 @@ So far, it's possible to :
 Formulated this way, it's all pretty standard stuff, but the key takeaway is that by combining context, useEffect, and useRef, it seems possible to create a BLoC object that performs logic and streams values directly to the relevant component.
 
 # TODO
+
+[] rename and reorganize folders for clarity
 
 [] write tests
 
